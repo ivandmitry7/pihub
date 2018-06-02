@@ -14,6 +14,8 @@ services:
     restart: always
     ports:
       - 6789:6789
+    networks:
+      - backend
 
   sonarr:
     image: lsioarmhf/sonarr:latest
@@ -31,6 +33,8 @@ services:
     restart: always
     ports:
       - 8989:8989
+    networks:
+      - backend
 
   radarr:
     image: lsioarmhf/radarr:latest
@@ -48,3 +52,9 @@ services:
     restart: always
     ports:
       - 7878:7878
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
