@@ -3,6 +3,7 @@ version: '2'
 services:
   portainer:
     image: portainer/portainer:arm
+    container_name: portainer
     ports:
      - 9000:9000
     volumes:
@@ -10,6 +11,7 @@ services:
 
   dns:
     image: mastermindg/rpi-dns:latest
+    container_name: dns
     ports:
       - "53:53/udp"
     volumes:
