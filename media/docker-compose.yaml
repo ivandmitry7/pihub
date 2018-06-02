@@ -4,6 +4,7 @@ services:
   nzbget:
     image: lsioarmhf/nzbget:latest
     container_name: nzbget
+    hostname: nzbget
     volumes:
       - ./nzbget_config:/config
       - ./dsmrdb_backups:/home/dsmr/app/backups
@@ -14,6 +15,7 @@ services:
   sonarr:
     image: lsioarmhf/sonarr:latest
     container_name: sonarr
+    hostname: sonarr
     links:
       - nzbget
     restart: always
@@ -23,6 +25,7 @@ services:
   radarr:
     image: lsioarmhf/radarr:latest
     container_name: radarr
+    hostname: radarr
     links:
       - nzbget
     restart: always
