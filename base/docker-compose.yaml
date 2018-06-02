@@ -1,0 +1,19 @@
+version: '1'
+
+services:
+  portainer:
+    image: portainer/portainer:arm
+    ports:
+     - 9000:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  dns:
+    image: mastermindg/rpi-dns:latest
+    ports:
+      - "53:53/udp"
+    volumes:
+      - /srv/docker/bind:/data
+    environment:
+      - ROOT_PASSWORD=admin
+    restart: always

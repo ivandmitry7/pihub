@@ -1,0 +1,30 @@
+version: '1'
+
+services:
+  nzbget:
+    image: lsioarmhf/nzbget:latest
+    container_name: nzbget
+    volumes:
+      - ./nzbget_config:/config
+      - ./dsmrdb_backups:/home/dsmr/app/backups
+    restart: always
+    ports:
+      - 6789:6789
+
+  sonarr:
+    image: lsioarmhf/sonarr:latest
+    container_name: sonarr
+    links:
+      - nzbget
+    restart: always
+    ports:
+      - 8989:8989
+
+  radarr:
+    image: lsioarmhf/radarr:latest
+    container_name: radarr
+    links:
+      - nzbget
+    restart: always
+    ports:
+      - 7878:7878
