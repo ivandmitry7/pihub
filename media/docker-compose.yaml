@@ -5,9 +5,12 @@ services:
     image: lsioarmhf/nzbget:latest
     container_name: nzbget
     hostname: nzbget
+    environment:
+      - TZ=Europe/Amsterdam
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - ./nzbget_config:/config
-      - ./dsmrdb_backups:/home/dsmr/app/backups
+      - /home/pi/downloads:/downloads
     restart: always
     ports:
       - 6789:6789
@@ -18,6 +21,13 @@ services:
     hostname: sonarr
     links:
       - nzbget
+    environment:
+      - TZ=Europe/Amsterdam
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/pi/config_sonarr:/config
+      - /home/pi/series:/tv
+      - /home/pi/downloads:/downloads
     restart: always
     ports:
       - 8989:8989
@@ -26,8 +36,15 @@ services:
     image: lsioarmhf/radarr:latest
     container_name: radarr
     hostname: radarr
+    environment:
+      - TZ=Europe/Amsterdam
     links:
       - nzbget
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /home/pi/config_radarr:/config
+      - /home/pi/movies:/movies
+      - /home/pi/downloads:/downloads
     restart: always
     ports:
       - 7878:7878
