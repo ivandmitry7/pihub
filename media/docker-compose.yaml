@@ -7,6 +7,8 @@ services:
     hostname: nzbget
     environment:
       - TZ=Europe/Amsterdam
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/config_nzbget:/config
@@ -25,6 +27,8 @@ services:
       - nzbget
     environment:
       - TZ=Europe/Amsterdam
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /home/pi/config_sonarr:/config
@@ -42,6 +46,8 @@ services:
     hostname: radarr
     environment:
       - TZ=Europe/Amsterdam
+      - PUID=1000
+      - PGID=1000
     links:
       - nzbget
     volumes:
