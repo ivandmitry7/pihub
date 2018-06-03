@@ -9,3 +9,14 @@ services:
       - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+
+  domoticz:
+    image: joshuacox/mkdomoticz:arm
+    container_name: domoticz
+    hostname: domoticz
+    ports:
+      - 8080:8080
+    volumes:
+      - /home/pi/config_domoticz:/config
+    privileged: true
+    
