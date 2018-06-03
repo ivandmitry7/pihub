@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Amsterdam
     volumes:
       - /etc/localtime:/etc/localtime:ro
-      - ./nzbget_config:/config
+      - ./config_nzbget:/config
       - /home/pi/downloads:/downloads
     restart: always
     ports:
