@@ -18,8 +18,8 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
     && rm -rf /tmp/*
 
 COPY Docker/* /
-RUN useradd -ms /bin/bash dsmr \
-    && mkdir -p /home/dsmr /var/www/dsmrreader/static \
+RUN id -u dsmr &>/dev/null || useradd -ms /bin/bash dsmr
+RUN mkdir -p /home/dsmr /var/www/dsmrreader/static \
     && usermod -a -G dialout root \
     && usermod -a -G dialout dsmr \
     && git clone https://github.com/dennissiemensma/dsmr-reader.git \
