@@ -1,4 +1,4 @@
-FROM casept/debian-armhf:jessie
+FROM debian:stretch
 LABEL maintainer="Bram van Dartel <root@rootrulez.com>"
 
 ARG TAG="v1.17.0"
@@ -22,7 +22,6 @@ RUN (id -u dsmr &>/dev/null || useradd -ms /bin/bash dsmr) \
     && mkdir -p /home/dsmr /var/www/dsmrreader/static \
     && usermod -a -G dialout root \
     && usermod -a -G dialout dsmr \
-    && rm -rf /home/dsmr/app \
     && git clone https://github.com/dennissiemensma/dsmr-reader.git \
        /home/dsmr/app/ \
     && (cd /home/dsmr/app/ && git checkout -q "$TAG") \
