@@ -19,5 +19,6 @@ services:
       - 8080:8080
     volumes:
       - /home/pi/config_domoticz:/config
+      - /etc/localtime:/etc/localtime:ro
     privileged: true
     restart: always
