@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  domoticz:
+    image: joshuacox/mkdomoticz:arm
+    container_name: domoticz
+    hostname: domoticz
+    ports:
+      - 8080:8080
+    volumes:
+      - /home/pi/config_domoticz:/config
+      - /etc/localtime:/etc/localtime:ro
+    privileged: true
+    restart: always
