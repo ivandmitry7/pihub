@@ -23,7 +23,7 @@ domoticzpasscode = ""
  
 # If enabled. The script will log to the file _.log
 # Logging to file only happens after the check for other instances, before that it only prints to screen.
-log_to_file = False
+log_to_file = True
  
 # The script supports two types to check if another instance of the script is running.
 # One will use the ps command, but this does not work on all machine (Synology has problems)
