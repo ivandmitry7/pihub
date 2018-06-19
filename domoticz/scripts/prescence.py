@@ -16,10 +16,10 @@ import json
 import base64
  
 # Settings for the domoticz server
-domoticzserver="localhost:8080"
+domoticzserver="192.168.1.15:8080"
 domoticzusername = "admin"
 domoticzpassword = "admin"
-domoticzpasscode = "Light/Switch Protection"
+domoticzpasscode = ""
  
 # If enabled. The script will log to the file _.log
 # Logging to file only happens after the check for other instances, before that it only prints to screen.
