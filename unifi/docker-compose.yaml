@@ -3,6 +3,9 @@ services:
   unifi:
     image: ryansch/unifi-rpi:latest
     container_name: unifi
+    hostname: unifi
+    ports:
+      - 8443:8443
     restart: always
     network_mode: host
     volumes:
