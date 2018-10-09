@@ -6,7 +6,7 @@ services:
     hostname: unifi
     ports:
       - 8443:8443
-      - 8080:8181
+      - 8181:8080
     restart: always
     network_mode: host
     volumes:
