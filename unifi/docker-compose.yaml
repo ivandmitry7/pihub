@@ -7,6 +7,10 @@ services:
     ports:
       - "8443:8443"
       - "8181:8080"
+      - "8081:8081"
+      - "8843:8843"
+      - "8880:8880"
+      - "3478:3478/udp"
     restart: always
     network_mode: host
     volumes:
