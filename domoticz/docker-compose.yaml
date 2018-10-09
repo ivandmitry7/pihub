@@ -6,7 +6,7 @@ services:
     container_name: domoticz
     hostname: domoticz
     ports:
-      - 8080:8080
+      - 8181:8080
     volumes:
       - /home/pi/config_domoticz:/config
       - /etc/localtime:/etc/localtime:ro
