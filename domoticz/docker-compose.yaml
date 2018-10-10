@@ -5,6 +5,8 @@ services:
     image: joshuacox/mkdomoticz:arm
     container_name: domoticz
     hostname: domoticz
+    environment:
+      TZ: "Europe/Amsterdam"
     ports:
       - 8181:8080
     volumes:
