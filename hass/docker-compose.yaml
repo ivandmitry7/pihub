@@ -6,4 +6,4 @@ services:
     hostname: hass
     ports:
       - "8123:8123"
-    restart: never
+    restart: no
