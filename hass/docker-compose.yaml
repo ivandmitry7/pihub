@@ -1,9 +1,9 @@
 version: '2'
 services:
-  unifi:
+  hass:
     image: homeassistant/home-assistant:latest
     container_name: hass
     hostname: hass
     ports:
       - "8123:8123"
-    restart: no
+    restart: "never"
