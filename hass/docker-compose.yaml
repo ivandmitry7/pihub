@@ -1,7 +1,7 @@
 version: '2'
 services:
   hass:
-    image: homeassistant/home-assistant:latest
+    image: homeassistant/raspberrypi2-homeassistant:latest
     container_name: hass
     hostname: hass
     ports:
