@@ -4,6 +4,13 @@ services:
     image: homeassistant/raspberrypi2-homeassistant:latest
     container_name: hass
     hostname: hass
+    environment:
+      TZ: "Europe/Amsterdam"
     ports:
       - "8123:8123"
     restart: "no"
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    volumes:
+      - /home/pi/config_hass:/config
+      - /etc/localtime:/etc/localtime:ro
