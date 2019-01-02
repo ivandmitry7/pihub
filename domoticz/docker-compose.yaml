@@ -12,5 +12,6 @@ services:
     volumes:
       - /home/pi/config_domoticz:/config
       - /etc/localtime:/etc/localtime:ro
+      - /home/pi/pihub/domoticz/scripts:/src/domoticz/scripts
     privileged: true
     restart: always
