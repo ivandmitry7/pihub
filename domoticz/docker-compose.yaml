@@ -2,7 +2,7 @@ version: '2'
 
 services:
   domoticz:
-    image: cgatay/domoticz:arm
+    image: cgatay/domoticz:4.10329-beta-arm
     container_name: domoticz
     hostname: domoticz
     environment:
