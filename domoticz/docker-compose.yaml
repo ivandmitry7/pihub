@@ -2,7 +2,7 @@ version: '2'
 
 services:
   domoticz:
-    image: joshuacox/mkdomoticz:arm
+    image: cgatay/domoticz:arm
     container_name: domoticz
     hostname: domoticz
     environment:
