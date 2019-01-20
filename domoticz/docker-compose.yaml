@@ -12,8 +12,7 @@ services:
     volumes:
       - /home/pi/config_domoticz:/config
       - /etc/localtime:/etc/localtime:ro
-      - /home/pi/pihub/domoticz/scripts:/src/domoticz/scripts
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
-    privileged: true
+    privileged: true 
     restart: always
