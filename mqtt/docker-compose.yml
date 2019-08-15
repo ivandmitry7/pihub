@@ -5,11 +5,11 @@ services:
     image: koenkk/zigbee2mqtt:arm32v6
     volumes:
       - /home/pi/mqtt:/app/data
-      - /home/pi/mqtt/zigbee-shepherd-converters:/app/node_modules/zigbee-shepherd-converters
+      # - /home/pi/mqtt/zigbee-shepherd-converters:/app/node_modules/zigbee-shepherd-converters
       - /home/pi/mqtt/lib/extension/homeassistant.js:/app/lib/extension/homeassistant.js
     devices:
       # CC251
-      #- /dev/ttyUSB_cc2531:/dev/ttyACM0
+      - /dev/ttyACM1:/dev/ttyACM0
       # CC2530 / GBAN GB2530S
       #- /dev/ttyUSB_cc2530:/dev/ttyACM0
     restart: always
