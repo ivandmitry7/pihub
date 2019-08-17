@@ -7,6 +7,8 @@ services:
     # ports:
     #   - 1883:1883
     #   - 9001:9001
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
     volumes:
       - /home/pi/rflinkgateway/log:/var/log
     restart: always
