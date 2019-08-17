@@ -7,4 +7,4 @@ WORKDIR /usr/src/app
 
 COPY src/ .
 
-CMD [ "python", "./RFLinkGateway.py" ]
+CMD [ "python3", "./RFLinkGateway.py" ]
