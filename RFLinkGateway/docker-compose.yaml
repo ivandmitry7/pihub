@@ -2,7 +2,7 @@ version: '2'
 services:
   rflinkgateway:
     container_name: rflinkgateway
-    image: arm32v7/python:3
+    image: rflinkgateway:armv7
     hostname: rflinkgateway
     # ports:
     #   - 1883:1883
