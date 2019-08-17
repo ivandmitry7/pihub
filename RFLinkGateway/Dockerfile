@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 # COPY requirements.txt ./
 # RUN pip install --no-cache-dir -r requirements.txt
-RUN python3 -m pip install tornado paho
+RUN python3 -m pip install tornado paho-mqtt
 
 COPY src/ .
 
