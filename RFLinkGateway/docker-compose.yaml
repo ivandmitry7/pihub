@@ -1,16 +1,14 @@
 version: '2'
 services:
-  mosquitto:
-    container_name: mosquitto
-    image: eclipse-mosquitto
-    hostname: mosquitto
-    ports:
-      - 1883:1883
-      - 9001:9001
+  rflinkgateway:
+    container_name: rflinkgateway
+    image: arm32v7/python:3
+    hostname: rflinkgateway
+    # ports:
+    #   - 1883:1883
+    #   - 9001:9001
     volumes:
-      - /home/pi/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
-      - /home/pi/mosquitto/data:/mosquitto/data
-      - /home/pi/mosquitto/log:/mosquitto/log
+      - /home/pi/rflinkgateway/log:/var/log
     restart: always
     network_mode: host
     environment:
