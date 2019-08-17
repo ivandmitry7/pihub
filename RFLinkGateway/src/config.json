@@ -1,8 +1,8 @@
 {
     "mqtt_host": "192.168.1.28",
     "mqtt_port": 1883,
-    "mqtt_user": "",
-    "mqtt_password": "",
+    "mqtt_user": null,
+    "mqtt_password": null,
     "mqtt_prefix": "rflink",
     "mqtt_message_timeout": 60,
     "mqtt_switch_incl_topic": "true",
