@@ -1,43 +1,45 @@
-version: '2'
+version: '3.6'
 
 services:
   dsmrdb:
-    image: postgres
+    image: arm32v6/postgres:10.5-alpine
     container_name: dsmrdb
-    volumes:
-      - ./dsmrdb:/var/lib/postgresql/data
-      - ./dsmrdb_backups:/home/dsmr/app/backups
     restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./dsmrdb:/var/lib/postgresql/data
     environment:
+      - TZ=Europe/Amsterdam
+      - PG_TZ=Europe/Amsterdam
       - POSTGRES_USER=dsmrreader
       - POSTGRES_PASSWORD=dsmrreader
       - POSTGRES_DB=dsmrreader
-    networks:
-      - backend
 
   dsmr:
-    build: .
-    image: casept/debian-armhf:jessie
+#    build: .
+    image: xirixiz/dsmr-reader-docker:arm32v6-latest
     container_name: dsmr
+    depends_on:
+      - dsmrdb
+    cap_add:
+      - NET_ADMIN    
     links:
       - dsmrdb
     restart: always
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./dsmr_backups:/dsmr/backups
     environment:
-      - DB_HOST=dsmrdb
-      - DSMR_USER=admin
-      - DSMR_EMAIL=root@localhost
-      - DSMR_PASSWORD=admin
+      - TZ=Europe/Amsterdam
       - VIRTUAL_HOST=localhost
+      - SD_AUTOSTART_MQTT=false
+      - SD_AUTORESTART_MQTT=false
     ports:
-      - 8888:80
-      - 8889:443
-    networks:
-      - backend
+      - 7777:80
+      - 7779:443
+    # devices:
+    #   - /dev/ttyUSB0:/dev/ttyUSB0
 
-volumes:
-   dsmrdb:
-   dsmrdb_backups:
-
-networks:
-  backend:
-    driver: bridge
+#volumes:
+#   dsmrdb:
+#   dsmrdb_backups:
