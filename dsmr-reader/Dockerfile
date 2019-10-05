@@ -1,7 +1,7 @@
-FROM __BASEIMAGE_ARCH__/python:alpine
+FROM arm32v6/python:alpine
 
 ENV QEMU_EXECVE 1
-COPY ./tmp/qemu/qemu-__QEMU_ARCH__-static /usr/bin/
+COPY ./tmp/qemu/qemu-arm32-static /usr/bin/
 COPY ./tmp/dsmr/ /dsmr
 
 ENV DSMR_USER admin
@@ -25,7 +25,7 @@ ENV SD_AUTORESTART_BACKEND true
 ENV SD_AUTOSTART_MQTT true
 ENV SD_AUTORESTART_MQTT true
 
-RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
+RUN ["/usr/bin/qemu-arm32-static", "/bin/sh", "-c", \
      "apk --update add --no-cache \
       bash \
       curl \
@@ -34,17 +34,17 @@ RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
       tzdata \
       supervisor"]
 
-RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
+RUN ["/usr/bin/qemu-arm32-static", "/bin/sh", "-c", \
      "cp /dsmr/dsmrreader/provisioning/django/postgresql.py /dsmr/dsmrreader/settings.py"]
 
-RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
+RUN ["/usr/bin/qemu-arm32-static", "/bin/sh", "-c", \
      "apk add --virtual .build-deps gcc musl-dev postgresql-dev && \
       pip3 install -r /dsmr/dsmrreader/provisioning/requirements/base.txt --no-cache-dir && \
       pip3 install -r /dsmr/dsmrreader/provisioning/requirements/postgresql.txt --no-cache-dir && \
       apk --purge del .build-deps && \
       rm -rf /tmp/*"]
 
-RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
+RUN ["/usr/bin/qemu-arm32-static", "/bin/sh", "-c", \
      "mkdir -p /run/nginx/ && \
       ln -sf /dev/stdout /var/log/nginx/access.log && \
       ln -sf /dev/stderr /var/log/nginx/error.log && \
@@ -53,7 +53,7 @@ RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
       cp /dsmr/dsmrreader/provisioning/nginx/dsmr-webinterface /etc/nginx/conf.d/dsmr-webinterface.conf"]
 
 COPY ./app/run.sh /run.sh
-RUN ["/usr/bin/qemu-__QEMU_ARCH__-static", "/bin/sh", "-c", \
+RUN ["/usr/bin/qemu-arm32-static", "/bin/sh", "-c", \
      "chmod u+x /run.sh"]
 
 COPY ./app/supervisord.ini /etc/supervisor.d/supervisord.ini
