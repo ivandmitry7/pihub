@@ -31,8 +31,6 @@ services:
     ports:
       - 8888:80
       - 8889:443
-    devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
     networks:
       - backend
 
