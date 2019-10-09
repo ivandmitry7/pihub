@@ -14,10 +14,13 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, message):
-    # print("Message received: " + re.sub(r"\"TS\":.*?,", "", message.payload))
+    # try:
+    #     print("Message received: " + re.sub(r"\"TS\":.*?,", "", message.payload.decode('utf-8')))
+    # except Exception as e: 
+    #     print(e)
 
     try:
-        j = json.loads(re.sub(r"\"TS\":.*?,", "", message.payload))
+        j = json.loads(re.sub(r"\"TS\":.*?,", "", message.payload.decode('utf-8')))
     except:
         print('error parsing json data')
 
