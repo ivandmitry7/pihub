@@ -23,7 +23,7 @@ def on_message(client, userdata, message):
 
     response = requests.post(
         'http://192.168.1.28:7777/api/v2/datalogger/dsmrreading',
-        headers={'X-AUTHKEY': 'NTJ4NOH4TFB1JS2SXZ7NYHEO1KNHPL4OAMPJTF9WPPUUSR6NIQ79XJQRQO85PTP7'},
+        headers={'X-AUTHKEY': 'S9M8YBQHK7JT6LCGEWVYT2K3CU55OHXCPKOSCF70HVRM0NVWI4QQFK0G9CFY4FNA'},
         data={
             'electricity_currently_delivered': j['P1GATEWAY']['P1'],
             'electricity_currently_returned': 0,
