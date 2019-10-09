@@ -1,0 +1,88 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+mqtt:
+  discovery: true
+  broker: 192.168.1.28
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+
+rflink:
+  port: /dev/ttyACM0
+
+light:
+  - platform: rflink
+    automatic_add: false
+    device_defaults:
+      fire_event: true
+      signal_repetitions: 1
+    devices:
+      newkaku_01b455a6_1:
+        name: badkamer lamp
+      newkaku_01b455a6_2:
+        name: spiegelkast lamp
+
+sensor:
+  - platform: rflink
+    automatic_add: true
+  - platform: mqtt
+    name: "Meter_P1"
+    unit_of_measurement: "W"
+    state_topic: "tele/sonoffP1/SENSOR"
+    value_template: "{{ (value_json.P1GATEWAY.P1 | float *1000) | round(0) }}"
+    icon: mdi:flash
+    force_update: true
+  - platform: mqtt
+    name: "Meter_T1"
+    unit_of_measurement: "kWh"
+    state_topic: "tele/sonoffP1/SENSOR"
+    value_template: "{{ value_json.P1GATEWAY.T1 | round(2) }}"
+    icon: mdi:flash-circle
+    force_update: true
+  - platform: mqtt
+    name: "Meter_T2"
+    unit_of_measurement: "kWh"
+    state_topic: "tele/sonoffP1/SENSOR"
+    value_template: "{{ value_json.P1GATEWAY.T2 | round(2) }}"
+    icon: mdi:flash-circle
+    force_update: true
+  - platform: mqtt
+    name: "Meter_Gas"
+    unit_of_measurement: "m3"
+    state_topic: "tele/sonoffP1/SENSOR"
+    value_template: "{{ value_json.P1GATEWAY.GAS | round(2) }}"
+    icon: mdi:fire
+    force_update: true
+  - platform: mqtt
+    name: "Meter Tarief"
+    state_topic: "tele/sonoffP1/SENSOR"
+    value_template: "{% if value_json.P1GATEWAY.TAR is equalto 1 %}Laag{% else %}Hoog{% endif %}"
+    icon: mdi:swap-vertical
+    force_update  : true  
+
+webhook:
+
+zigbee2mqtt_networkmap:
+
+panel_iframe:
+  networkmap:
+    title: 'Zigbee Map'
+    url: '/local/community/zigbee2mqtt_networkmap/map.html'
+    icon: 'mdi:graphql'

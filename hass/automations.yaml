@@ -1,0 +1,95 @@
+- id: '1568482067702'
+  alias: Badkamer lamp aan
+  trigger:
+  - event_data:
+      entity_id: light.badkamer_lamp
+      state: 'on'
+    event_type: button_pressed
+    platform: event
+  condition: []
+  action:
+  - data:
+      brightness: '200'
+      entity_id: light.badkamer
+    service: light.turn_on
+- id: '1568482116774'
+  alias: Badkamer lamp uit
+  trigger:
+  - event_data:
+      entity_id: light.badkamer_lamp
+      state: 'off'
+    event_type: button_pressed
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: light.badkamer
+    service: light.turn_off
+- id: '1568483286238'
+  alias: Spiegelkast lamp aan
+  trigger:
+  - event_data:
+      entity_id: light.spiegelkast_lamp
+      state: 'on'
+    event_type: button_pressed
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.sonoff
+    service: switch.turn_on
+- id: '1568483339216'
+  alias: Spiegelkast lamp uit
+  trigger:
+  - event_data:
+      entity_id: light.spiegelkast_lamp
+      state: 'off'
+    event_type: button_pressed
+    platform: event
+  condition: []
+  action:
+  - data:
+      entity_id: switch.sonoff
+    service: switch.turn_off
+- id: '1568546058479'
+  alias: Woonkamerlamp aan
+  trigger:
+  - entity_id: sensor.ikea_remote_action
+    platform: state
+    to: toggle
+  condition: []
+  action:
+  - data:
+      entity_id: light.woonkamer
+    service: light.toggle
+- id: '1569052995029'
+  alias: Nachtlampje aan
+  trigger:
+  - entity_id: binary_sensor.badkamer_motion
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  - condition: state
+    entity_id: light.badkamer
+    state: 'off'
+  action:
+  - data:
+      brightness: '10'
+      entity_id: light.badkamer
+    service: light.turn_on
+- id: '1569054363026'
+  alias: Nachtlampje uit
+  trigger:
+  - entity_id: binary_sensor.badkamer_motion
+    from: 'on'
+    platform: state
+    to: 'off'
+  condition: []
+  action:
+  - data:
+      entity_id: light.badkamer
+    service: light.turn_off
