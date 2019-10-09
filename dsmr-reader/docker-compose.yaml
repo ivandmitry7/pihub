@@ -1,4 +1,4 @@
-version: '2'
+version: '3.6'
 
 services:
   dsmrdb:
@@ -16,8 +16,8 @@ services:
       - POSTGRES_DB=dsmrreader
 
   dsmr:
-    build: .
-    image: xirixiz/dsmr-reader-docker:test-latest
+    # build: .
+    image: xirixiz/dsmr-reader-docker:arm32v6-v2.6.0
     container_name: dsmr
     depends_on:
       - dsmrdb
@@ -32,13 +32,29 @@ services:
     environment:
       - TZ=Europe/Amsterdam
       - VIRTUAL_HOST=localhost
-      - SD_AUTOSTART_MQTT=false
-      - SD_AUTORESTART_MQTT=false
+      - SD_START_MQTT=false
+      - SD_RESTART_MQTT=false
+      - SD_LOGLEVEL=error
+      - SD_USER=root
+      - SD_GROUP=root
+      - SD_START_DATALOGGER=true
+      - SD_RESTART_DATALOGGER=true
+      - SD_START_BACKEND=true
+      - SD_RESTART_BACKEND=true
+      - DSMR_USER=admin
+      - DSMR_EMAIL=hdoedens@gmail.com
+      - DSMR_PASSWORD=admin
+      - DB_HOST=dsmrdb
+      - DB_PORT=5432
+      - DB_USER=dsmrreader
+      - DB_PASS=dsmrreader
+      - DB_NAME=dsmrreader
     ports:
       - 7777:80
       - 7779:443
+#    devices:
+# - /dev/ttyUSB0:/dev/ttyUSB0
 
 volumes:
-  dsmrdb:
-  dsmrdb_backups:
-
+   dsmrdb:
+   dsmrdb_backups:
