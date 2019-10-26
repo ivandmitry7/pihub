@@ -14,3 +14,14 @@ services:
       - /dev/ttyACM0:/dev/ttyACM0
     restart: always
     network_mode: host
+
+  nodered:
+    container_name: node-red
+    image: nodered/node-red-docker:rpi
+    volumes:
+      - /home/pi/node-red:/data
+    ports:
+      - 1880:1880
+    links:
+      - hass
+    restart: always
